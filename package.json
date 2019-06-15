@@ -1,0 +1,26 @@
+{
+  "name": "goggle-books",
+  "version": "0.1.0",
+  "description": "A front-end to the Google Books API",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gramasu000/goggle-books.git"
+  },
+  "author": "Gautam Ramasubramanian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gramasu000/goggle-books/issues"
+  },
+  "homepage": "https://github.com/gramasu000/goggle-books#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "zombie": "^6.1.4"
+  }
+}
