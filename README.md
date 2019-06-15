@@ -11,16 +11,16 @@ The output from there will be redirected back to the user in a pretty format.
 
 ### 06-13-19, 06-14-19 - Created mockups for desktop using tailwind css
 
-<img src="notes+mockups/dt-mk-wel.png" width=100px />
-<img src="notes+mockups/dt-mk-nr.png" width=100px />
+<img src="notes+mockups/dt-mk-wel.png" width=350px />
+<img src="notes+mockups/dt-mk-nr.png" width=350px />
 
-<img src="notes+mockups/dt-mk-l.png" width=100px />
+<img src="notes+mockups/dt-mk-l.png" width=350px />
 
 
 ### 06-12-19 - Created hand-drawn mockups for desktop and mobile experience
 
-<img src="notes+mockups/dt-dr-wel.png" width="40px" />
-<img src="notes+mockups/dt-dr-l.png" width="40px" />
-<img src="notes+mockups/dt-dr-nr.png" width="40px" />
+<img src="notes+mockups/dt-dr-wel.png" width="200px" />
+<img src="notes+mockups/dt-dr-l.png" width="200px" />
+<img src="notes+mockups/dt-dr-nr.png" width="200px" />
 
 ### 06-12-19 - Project Repository Opened
