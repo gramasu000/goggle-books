@@ -4,7 +4,13 @@
   "description": "A front-end to the Google Books API",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "start": "node server.js",
+    "build:css": "npm run tailwind:css && npm run purge:css && npm run autoprefix:css && npm run uglify:css && npm run copy:css",
+    "tailwind:css": "npx tailwind build static/css/style.css -o static/css/output.css",
+    "purge:css": "npx purgecss --css static/css/output.css --content views/* -o static/css/",
+    "autoprefix:css": "npx postcss static/css/output.css --use autoprefixer -o static/css/output.css",
+    "uglify:css": "npx uglifycss static/css/output.css --output static/css/output.css",
+    "copy:css": "cp static/css/output.css public/style.min.css" 
   },
   "repository": {
     "type": "git",
@@ -21,6 +27,12 @@
     "pug": "^2.0.3"
   },
   "devDependencies": {
+    "autoprefixer": "^9.6.0",
+    "postcss-cli": "^6.1.2",
+    "purgecss": "^1.3.0",
+    "tailwindcss": "^1.0.4",
+    "uglify-js": "^3.6.0",
+    "uglifycss": "0.0.29",
     "zombie": "^6.1.4"
   }
 }

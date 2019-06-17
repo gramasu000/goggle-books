@@ -18,8 +18,8 @@ const path = require("path");
 /** @const express application instance */
 const app = express();
 
-/** Serve static files with /static mountpoint */
-app.use("/static", path.join(__dirname, "static"));
+/** Serve css and js files with /public mountpoint */
+app.use("/public", path.join(__dirname, "public"));
 
 /** Set view engine to Pug */
 app.set("view engine", "pug");
