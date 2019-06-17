@@ -16,7 +16,7 @@ body {
 }
 
 header {
-    @apply w-full h-full flex;
+    @apply w-full flex;
     @apply fixed top-0;
     @apply p-3;
     @apply bg-gray-200;
@@ -36,13 +36,12 @@ header > form > input {
     @apply flex-1;
     @apply appearance-none;
     @apply py-2 px-4;
-    @apply bg-gray-200;
-    @apply border-2 border-gray-200 rounded;
+    @apply bg-white;
+    @apply border-2 border-gray-300 rounded;
     @apply text-gray-700 leading-tight;
 }
 
 header > form > input:focus {
-    @apply bg-white;
     @apply outline-none border-gray-500;
 }
 
@@ -72,6 +71,7 @@ footer > a {
     width: 24px;
     height: 24px;
     background-image: url("https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png");
+    background-size: 24px 24px;
 }
 
 @screen md {

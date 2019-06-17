@@ -19,7 +19,8 @@ const path = require("path");
 const app = express();
 
 /** Serve css and js files with /public mountpoint */
-app.use("/public", path.join(__dirname, "public"));
+let static_middleware = express.static(path.join(__dirname, "public")); 
+app.use("/public", static_middleware);
 
 /** Set view engine to Pug */
 app.set("view engine", "pug");

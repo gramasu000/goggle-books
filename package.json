@@ -6,11 +6,14 @@
   "scripts": {
     "start": "node server.js",
     "build:css": "npm run tailwind:css && npm run purge:css && npm run autoprefix:css && npm run uglify:css && npm run copy:css",
+    "build:js": "npm run uglify:js && npm run copy:js",
     "tailwind:css": "npx tailwind build static/css/style.css -o static/css/output.css",
     "purge:css": "npx purgecss --css static/css/output.css --content views/* -o static/css/",
     "autoprefix:css": "npx postcss static/css/output.css --use autoprefixer -o static/css/output.css",
     "uglify:css": "npx uglifycss static/css/output.css --output static/css/output.css",
-    "copy:css": "cp static/css/output.css public/style.min.css" 
+    "copy:css": "cp static/css/output.css public/style.min.css",
+    "uglify:js": "npx uglifyjs static/js/script.js --compress --mangle -o static/js/output.js",
+    "copy:js": "cp static/js/output.js public/style.min.js" 
   },
   "repository": {
     "type": "git",
