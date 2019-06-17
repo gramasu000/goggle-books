@@ -9,17 +9,23 @@ The output from there will be redirected back to the user in a pretty format.
 ## Timeline
 
 
+### 06-15-19 - Made the mockups responsive to mobile
+
+<img src="notes+mockups/img/welcome_page_mobile.png" width="250px" style="display: inline;" />
+<img src="notes+mockups/img/no_results_page_mobile.png" width="250px" style="display: inline;" />
+<img src="notes+mockups/img/list_page_mobile.png" width="250px" style="display: inline" />
+
 ### 06-13-19, 06-14-19 - Created mockups for desktop using tailwind css
 
-<img src="notes+mockups/dt-mk-wel.png" width=600px />
-<img src="notes+mockups/dt-mk-nr.png" width=600px />
-<img src="notes+mockups/dt-mk-l.png" width=600px />
+<img src="notes+mockups/img/welcome_page_desktop.png" width=800px />
+<img src="notes+mockups/img/no_results_page_desktop.png" width=800px />
+<img src="notes+mockups/img/list_page_desktop.png" width=800px />
 
 
 ### 06-12-19 - Created hand-drawn mockups for desktop and mobile experience
 
-<img src="notes+mockups/dt-dr-wel.png" width="200px" />
-<img src="notes+mockups/dt-dr-l.png" width="200px" />
-<img src="notes+mockups/dt-dr-nr.png" width="200px" />
+<img src="notes+mockups/img/welcome_page_drawing.png" width="250px" style="display: inline;" />
+<img src="notes+mockups/img/no_results_page_drawing.png" width="250px" style="display: inline;" />
+<img src="notes+mockups/img/list_page_drawing.png" width="250px" style="display: inline" />
 
 ### 06-12-19 - Project Repository Opened
