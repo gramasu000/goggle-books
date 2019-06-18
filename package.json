@@ -13,7 +13,7 @@
     "uglify:css": "npx uglifycss static/css/output.css --output static/css/output.css",
     "copy:css": "cp static/css/output.css public/style.min.css",
     "uglify:js": "npx uglifyjs static/js/script.js --compress --mangle -o static/js/output.js",
-    "copy:js": "cp static/js/output.js public/style.min.js" 
+    "copy:js": "cp static/js/output.js public/script.min.js" 
   },
   "repository": {
     "type": "git",

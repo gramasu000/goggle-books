@@ -28,8 +28,8 @@ app.set("view engine", "pug");
 /** Set callback for GET,/ endpoint to render index.html template */
 app.get("/", (req, res) => res.render("index"));
 
-/** Set callback for GET,/ endpoint to render welcome.html subtemplate */
-app.get("/welcome", (req, res) => res.render("welcome"));
+/** Set callback for POST,/ endpoint to render welcome.html subtemplate */
+app.post("/welcome", (req, res) => res.render("welcome"));
 
 /* @module app */
 module.exports = app;

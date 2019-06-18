@@ -1,0 +1,1 @@
+window.onload=function(){var e=new XMLHttpRequest;e.open("POST","https://goggle-books.herokuapp.com/welcome"),e.responseType="text",e.onload=function(){document.querySelector("#content").innerHTML=e.response},e.send()};

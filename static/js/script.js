@@ -3,14 +3,13 @@
  *
  * @author Gautam Ramasubramanian
  */
-"use strict"
 
 window.onload = function () {
-    let request = new XMLHttpRequest();
-    request.open("POST", /* Put URL here later */);
-    request.responseType = "text";
-    request.onload = function () {
-        document.querySelector("#content").innerHTML = request.response;
+    var req = new XMLHttpRequest();
+    req.open("POST", "https://goggle-books.herokuapp.com/welcome");
+    req.responseType = "text";
+    req.onload = function () {
+        document.querySelector("#content").innerHTML = req.response;
     }
-    request.send();
+    req.send();
 }
