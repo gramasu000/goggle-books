@@ -96,29 +96,29 @@ footer > a {
     }
 }
 
-h1 { 
+#content h1 { 
     @apply mb-6; 
     @apply text-gray-700 text-2xl; 
 }
 
-p {
+#content p {
     @apply text-gray-700 text-sm;
 }
 
 @screen sm {
-    h1 { @apply text-3xl; }
+    #content h1 { @apply text-3xl; }
 }
 
 @screen md {
-    p { @apply text-lg; }
-    h1 { @apply text-4xl; }
+    #content p { @apply text-lg; }
+    #content h1 { @apply text-4xl; }
 }
 
 @screen lg {
-    h1 { @apply text-5xl; }
+    #content h1 { @apply text-5xl; }
 }
 
 @screen xl {
-    p { @apply text-xl; }
-    h1 { @apply text-6xl; }
+    #content p { @apply text-xl; }
+    #content h1 { @apply text-6xl; }
 }
