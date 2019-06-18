@@ -8,12 +8,16 @@ The output from there will be redirected back to the user in a pretty format.
 
 ## Timeline
 
+### 06-16-19, 06-17-19 - Deployed the welcome page on Heroku
+
+Steps:
+ - Developed CSS Processing Pipeline - TailwindCSS, PurgeCSS, Autoprefixer, UglifyCSS (Minification)
+ - Developed JS Processing Pipeline (Browser Scripts) - UglifyJS (Minification)
+ - Used ExpressJS web application server and Pug template engine/renderer
 
 ### 06-15-19 - Made the mockups responsive to mobile
 
-<img src="notes+mockups/img/welcome_page_mobile.png" width="250px" style="display: inline;" />
-<img src="notes+mockups/img/no_results_page_mobile.png" width="250px" style="display: inline;" />
-<img src="notes+mockups/img/list_page_mobile.png" width="250px" style="display: inline" />
+| <img src="notes+mockups/img/welcome_page_mobile.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/no_results_page_mobile.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/list_page_mobile.png" width="250px" style="display: inline" /> |
 
 ### 06-13-19, 06-14-19 - Created mockups for desktop using tailwind css
 
@@ -21,11 +25,8 @@ The output from there will be redirected back to the user in a pretty format.
 <img src="notes+mockups/img/no_results_page_desktop.png" width=800px />
 <img src="notes+mockups/img/list_page_desktop.png" width=800px />
 
-
 ### 06-12-19 - Created hand-drawn mockups for desktop and mobile experience
 
-<img src="notes+mockups/img/welcome_page_drawing.png" width="250px" style="display: inline;" />
-<img src="notes+mockups/img/no_results_page_drawing.png" width="250px" style="display: inline;" />
-<img src="notes+mockups/img/list_page_drawing.png" width="250px" style="display: inline" />
+| <img src="notes+mockups/img/welcome_page_drawing.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/no_results_page_drawing.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/list_page_drawing.png" width="250px" style="display: inline" /> |
 
 ### 06-12-19 - Project Repository Opened
