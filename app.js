@@ -22,11 +22,12 @@ const app = express();
 app.set("view engine", "pug");
 
 /** Set middleware to redirect HTTP requests to HTTPS */
-app.use((req, res) => {
+app.use((req, res, next) => {
     if (!req.secure) {
         let https_url = `https://${req.headers.host}${req.url}`;
         res.redirect(https_url);
     }
+    next();
 });
 
 /** Serve css and js files with /public mountpoint */
