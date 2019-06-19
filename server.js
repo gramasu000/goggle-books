@@ -33,5 +33,7 @@ const port = initialize_port();
 let server = http.createServer(app)
 
 /** Set server to listen to port */
-server.listen(port);
+server.listen(port, () => { 
+    console.log(`Application server listening to port ${port}`);
+});
 

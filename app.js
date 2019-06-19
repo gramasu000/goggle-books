@@ -24,9 +24,11 @@ app.set("view engine", "pug");
 /** Set middleware to redirect HTTP requests to HTTPS */
 app.use((req, res, next) => {
     if (!req.secure) {
+        console.log(`App attempting to connect using protocol ${req.protocol}. Redirecting to https.`);
         let https_url = `https://${req.headers.host}${req.url}`;
         res.redirect(https_url);
     }
+    console.log(`App connecting using protocol ${req.protocol}. Serving webpages now.`);
     next();
 });
 
@@ -35,10 +37,16 @@ let static_middleware = express.static(path.join(__dirname, "public"));
 app.use("/public", static_middleware);
 
 /** Set callback for GET,/ endpoint to render index.html template */
-app.get("/", (req, res) => res.render("index"));
+app.get("/", (req, res) => {
+    console.log(`App connecting to ${req.url} using HTTP method ${req.method}. Rendering index webpage.`)
+    res.render("index");
+});
 
 /** Set callback for POST,/ endpoint to render welcome.html subtemplate */
-app.post("/welcome", (req, res) => res.render("welcome"));
+app.post("/welcome", (req, res) => {
+    console.log(`App connecting to ${req.url} using HTTP method ${req.method}. Sending welcome html.`)
+    res.render("welcome")
+});
 
 /* @module app */
 module.exports = app;
