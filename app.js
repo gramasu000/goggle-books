@@ -4,6 +4,7 @@
  * @author Gautam Ramasubramanian
  *
  * @requires NPM:express
+ * @requires NPM:express-sslify
  * @requires path
  */
 
@@ -18,8 +19,14 @@ const path = require("path");
 /** @const express application instance */
 const app = express();
 
+/** @const express middleware function for enforcing HTTPS connection */
+const enforce = require("express-sslify");
+
 /** Set view engine to Pug */
 app.set("view engine", "pug");
+
+/** Use HTTPS enforce middleware in application */
+app.use(enforce.HTTPS());
 
 /** Serve css and js files with /public mountpoint */
 let static_middleware = express.static(path.join(__dirname, "public")); 
@@ -30,13 +37,8 @@ app.use("/public", static_middleware);
  *      (2) redirect to HTTPS link if request is through HTTP
  */
 app.get("/", (req, res) => {
-    if (req.secure) {
-        console.log(`App connecting to ${req.url} using HTTPS. Rendering index webpage.`);
-        res.render("index");
-    } else {
-        console.log(`App attempting to connect ${req.url} using HTTP. Redirecting to HTTPS.`);
-        res.redirect("https://" + req.headers.host + req.url);
-    }
+    console.log(`App connecting to ${req.url} using HTTP method ${req.method}. Rendering index webpage.`);
+    res.render("index");
 });
 
 /** Set callback for POST,/ endpoint to 
@@ -44,10 +46,8 @@ app.get("/", (req, res) => {
  *      (2) Give a 404 error is request is not secure
  */
 app.post("/welcome", (req, res) => {
-    if (req.secure) {
-        console.log(`App connecting to ${req.url} using HTTP method ${req.method}. Sending welcome html.`);
-        res.render("welcome");
-    }
+    console.log(`App connecting to ${req.url} using HTTP method ${req.method}. Sending welcome html.`);
+    res.render("welcome");
 });
 
 /* @module app */
