@@ -4,7 +4,7 @@
  * @author Gautam Ramasubramanian
  *
  * @requires NPM:express
- * @requires NPM:express-sslify
+ * @requires NPM:heroku-ssl-redirect
  * @requires path
  */
 
@@ -20,13 +20,13 @@ const path = require("path");
 const app = express();
 
 /** @const express middleware function for enforcing HTTPS connection */
-const enforce = require("express-sslify");
+const redirect = require("heroku-ssl-redirect");
 
 /** Set view engine to Pug */
 app.set("view engine", "pug");
 
-/** Use HTTPS enforce middleware in application */
-app.use(enforce.HTTPS());
+/** Use HTTPS redirect middleware in application - to redirect HTTP connections to HTTPS */
+app.use(redirect());
 
 /** Serve css and js files with /public mountpoint */
 let static_middleware = express.static(path.join(__dirname, "public")); 

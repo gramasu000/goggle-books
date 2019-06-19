@@ -28,7 +28,7 @@
   "homepage": "https://github.com/gramasu000/goggle-books#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-sslify": "^1.2.0",
+    "heroku-ssl-redirect": "0.0.4",
     "pug": "^2.0.3"
   },
   "devDependencies": {
