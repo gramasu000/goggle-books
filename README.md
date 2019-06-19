@@ -17,6 +17,7 @@ Steps:
 
 ### 06-15-19 - Made the mockups responsive to mobile
 
+
 | <img src="notes+mockups/img/welcome_page_mobile.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/no_results_page_mobile.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/list_page_mobile.png" width="250px" style="display: inline" /> |
 
 ### 06-13-19, 06-14-19 - Created mockups for desktop using tailwind css
@@ -26,6 +27,7 @@ Steps:
 <img src="notes+mockups/img/list_page_desktop.png" width=800px />
 
 ### 06-12-19 - Created hand-drawn mockups for desktop and mobile experience
+
 
 | <img src="notes+mockups/img/welcome_page_drawing.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/no_results_page_drawing.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/list_page_drawing.png" width="250px" style="display: inline" /> |
 
