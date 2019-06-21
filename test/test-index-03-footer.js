@@ -79,7 +79,31 @@ describe("Nightmare tests https://goggle-books.herokuapp.com footer element", fu
                     assert.ok(statement);
                 }
                 done();
-            })
+            }).catch(done);
+    });
+
+    it("Footer link should have href property 'https://github.com/gramasu000'", function (done) {
+        browser.goto("https://goggle-books.herokuapp.com")
+            .wait(200)
+            .evaluate(() => document.querySelector("footer > a").href)
+            .end()
+            .then(function (res) {
+                assert.strictEqual(res, "https://github.com/gramasu000");
+                done();
+            }).catch(done);
+    });
+
+    it("Footer link should actually direct the browser to 'https://github.com/gramasu000", function (done) {
+        browser.goto("https://goggle-books.herokuapp.com")
+            .wait(200)
+            .click("footer > a")
+            .wait(200)
+            .evaluate(() => document.URL)
+            .end()
+            .then(function (res) {
+                assert.strictEqual(res, "https://github.com/gramasu000");
+                done();
+            }).catch(done);
     });
     
 });
