@@ -8,6 +8,22 @@ The output from there will be redirected back to the user in a pretty format.
 
 ## Timeline
 
+### 06-20-19, 06-21-19 - Made more User Interface Tests
+
+ - Stopped using ZombieJS as ZombieJS does not run client-side javascript properly.
+ - Searched for alternate options (CasperJS, NightmareJS, etc.) and eventually settled on NightmareJS 
+ - Rewrote all tests to use NightmareJS
+ - Retained MochaJS Testing Framework
+
+### 06-19-19 - Heroku Deployment Configurations
+
+ - Tried to reroute all HTTP requests to / to HTTPS
+ - Needed special expressJS middleware, given by the heroku-ssl-redirect package  
+
+### 06-18-19 - Made User Interface Tests
+
+ - Used ZombieJS headless browser and Mocha testing framework
+
 ### 06-16-19, 06-17-19 - Deployed the welcome page on Heroku
 
 Steps:
@@ -17,8 +33,7 @@ Steps:
 
 ### 06-15-19 - Made the mockups responsive to mobile
 
-
-| <img src="notes+mockups/img/welcome_page_mobile.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/no_results_page_mobile.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/list_page_mobile.png" width="250px" style="display: inline" /> |
+<img src="notes+mockups/img/welcome_page_mobile.png" width="250px" style="display: inline;" /> <img src="notes+mockups/img/no_results_page_mobile.png" width="250px" style="display: inline;" /> <img src="notes+mockups/img/list_page_mobile.png" width="250px" style="display: inline" /> 
 
 ### 06-13-19, 06-14-19 - Created mockups for desktop using tailwind css
 
@@ -29,6 +44,6 @@ Steps:
 ### 06-12-19 - Created hand-drawn mockups for desktop and mobile experience
 
 
-| <img src="notes+mockups/img/welcome_page_drawing.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/no_results_page_drawing.png" width="250px" style="display: inline;" /> | <img src="notes+mockups/img/list_page_drawing.png" width="250px" style="display: inline" /> |
+<img src="notes+mockups/img/welcome_page_drawing.png" width="250px" style="display: inline;" /> <img src="notes+mockups/img/no_results_page_drawing.png" width="250px" style="display: inline;" /> <img src="notes+mockups/img/list_page_drawing.png" width="250px" style="display: inline" /> 
 
 ### 06-12-19 - Project Repository Opened
