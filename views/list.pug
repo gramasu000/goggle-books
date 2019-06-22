@@ -1,0 +1,17 @@
+//-
+    Template for list of results page - to be inserted in html
+    Templating Language - PugJS
+    Author - Gautam Ramasubramanian
+
+mixin volume(title, author, publisher, link, imglink)
+    li
+        a(href=link)
+            img(src=imglink)
+            div
+                h1 title
+                h2 author
+                p publisher
+
+ul(id="results")
+    each val in data.items
+        +volume(val["volumeInfo"]["title"], val["volumeInfo"]["authors"][0], val["volumeInfo"]["publisher"], val["previewLink"], val["imageLinks"]["thumbnail"]) 

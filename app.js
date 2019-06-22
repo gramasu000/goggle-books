@@ -13,24 +13,47 @@
 /** @const express module */
 const express = require("express");
 
-/** @const path module */
-const path = require("path");
-
 /** @const express application instance */
 const app = express();
-
-/** @const express middleware function for enforcing HTTPS connection */
-const redirect = require("heroku-ssl-redirect");
 
 /** Set view engine to Pug */
 app.set("view engine", "pug");
 
+/** @const express middleware function for enforcing HTTPS connection */
+const redirect = require("heroku-ssl-redirect");
+
 /** Use HTTPS redirect middleware in application - to redirect HTTP connections to HTTPS */
 app.use(redirect());
+
+/** @const path module */
+const path = require("path");
 
 /** Serve css and js files with /public mountpoint */
 let static_middleware = express.static(path.join(__dirname, "public")); 
 app.use("/public", static_middleware);
+
+const http_req = require("request");
+
+function make_options(req) {
+    return {
+        uri: "https://www.googleapis.com/books/v1/volumes",
+        method: "GET",
+        json: true,
+        qs: {
+            q: req.query.query,
+            key: "AIzaSyCoxEfQQzTGEyZeoKM8udfBdt1JOuEK16E",
+            maxResults: 40,
+            maxAllowedMaturityRating: "not-mature",
+            startIndex: 0
+        }
+    };
+}
+
+function make_callback(res) {
+    return function (error, response, body) {
+        res.send(body);
+    }
+}
 
 /** Set callback for GET,/ endpoint to 
  *      (1) render index.html template if request is through HTTPS 
@@ -48,6 +71,15 @@ app.get("/", (req, res) => {
 app.post("/welcome", (req, res) => {
     console.log(`App connecting to ${req.url} using HTTP method ${req.method}. Sending welcome html.`);
     res.render("welcome");
+});
+
+app.post("/search", (req, res, next) => {
+    http_req(make_options(req), make_callback(res));
+});
+
+app.post("/", (req, res) => {
+    console.log("App posting to /");
+    console.log(req.args);
 });
 
 /* @module app */
