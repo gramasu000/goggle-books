@@ -45,7 +45,7 @@ header > form > input:focus {
     @apply outline-none border-gray-500;
 }
 
-header > form > button {
+header > button {
     @apply hidden;
 }
 
@@ -80,10 +80,10 @@ footer > a {
         @apply mr-6;
         @apply font-normal text-2xl text-gray-700;
     }
-    header > form > input {
+    header > form {
         @apply mr-6;
     }
-    header > form > button {
+    header > button {
         @apply block;
         @apply float-right;
         @apply py-2 px-4;
@@ -91,7 +91,7 @@ footer > a {
         @apply shadow rounded;
         @apply text-white text-lg font-bold;
     }
-    header > form > button:hover {
+    header > button:hover {
         @apply bg-gray-400;
     }
 }
