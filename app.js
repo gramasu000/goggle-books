@@ -40,11 +40,11 @@ function make_options(req) {
         method: "GET",
         json: true,
         qs: {
-            q: req.query.query,
+            q: req.query.q,
             key: "AIzaSyCoxEfQQzTGEyZeoKM8udfBdt1JOuEK16E",
-            maxResults: 10,
+            maxResults: req.query.maxResults,
             maxAllowedMaturityRating: "not-mature",
-            startIndex: 0
+            startIndex: req.query.startIndex,
         }
     };
 }
@@ -81,7 +81,11 @@ function get_data(body) {
 function make_callback(res) {
     return function (err, resp, body) {
         let data = get_data(body);
-        res.render("list", { data: data });
+        if (data.length > 0) {
+            res.render("list", { data: data });
+        } else {
+            res.render("no-result");
+        }
     }
 }
 

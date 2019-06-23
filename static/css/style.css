@@ -156,6 +156,20 @@ footer > a {
     @apply truncate;
 } 
 
+#change-page {
+    @apply flex items-center justify-between;
+}
+
+#change-page > button {
+    @apply rounded bg-gray-700;
+    @apply m-3 py-2 px-4;
+    @apply text-white font-bold;
+}
+
+#change-page > button:disabled {
+    @apply bg-gray-300;
+}
+
 @screen md {
     #content > p { @apply text-lg; }
     #content > h1 { @apply text-4xl; }
