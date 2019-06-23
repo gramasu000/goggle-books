@@ -23,7 +23,7 @@ app.set("view engine", "pug");
 const redirect = require("heroku-ssl-redirect");
 
 /** Use HTTPS redirect middleware in application - to redirect HTTP connections to HTTPS */
-app.use(redirect());
+//app.use(redirect());
 
 /** @const path module */
 const path = require("path");
@@ -32,62 +32,6 @@ const path = require("path");
 let static_middleware = express.static(path.join(__dirname, "public")); 
 app.use("/public", static_middleware);
 
-const http_req = require("request");
-
-function make_options(req) {
-    return {
-        uri: "https://www.googleapis.com/books/v1/volumes",
-        method: "GET",
-        json: true,
-        qs: {
-            q: req.query.q,
-            key: "AIzaSyCoxEfQQzTGEyZeoKM8udfBdt1JOuEK16E",
-            maxResults: req.query.maxResults,
-            maxAllowedMaturityRating: "not-mature",
-            startIndex: req.query.startIndex,
-        }
-    };
-}
-
-function get_data(body) {
-    let data = [];
-    if (body.items) {
-        for (let item of body.items) {
-            let info = item["volumeInfo"];
-            let title = info["title"] || "Title not known";
-            let publisher = info["publisher"] || "Publisher not known";
-            let infolink = info["infoLink"] || "#";
-            let authors = "Authors not known";
-            if (info["authors"]) {
-                authors = info["authors"].join(", ");
-            }
-            let thumbnail = "https://image.flaticon.com/icons/svg/149/149374.svg";
-            if (info["imageLinks"]) {
-                thumbnail = Object.values(info["imageLinks"]).slice(-1)[0]; 
-            }
-            data.push ({
-                title: title,
-                authors: authors,
-                publisher: publisher,
-                thumbnail: thumbnail,
-                infolink: infolink
-            });
-        }
-    } 
-    return data;
-}
-
-
-function make_callback(res) {
-    return function (err, resp, body) {
-        let data = get_data(body);
-        if (data.length > 0) {
-            res.render("list", { data: data });
-        } else {
-            res.render("no-result");
-        }
-    }
-}
 
 /** Set callback for GET,/ endpoint to 
  *      (1) render index.html template if request is through HTTPS 
@@ -107,14 +51,17 @@ app.post("/welcome", (req, res) => {
     res.render("welcome");
 });
 
-app.post("/search", (req, res, next) => {
-    http_req(make_options(req), make_callback(res));
+const http_req = require("request");
+const search_api = require("./api-search"); 
+app.post("/search", (req, res) => {
+    http_req(search_api.make_options(req), search_api.make_callback(res));
 });
 
-app.post("/", (req, res) => {
-    console.log("App posting to /");
-    console.log(req.args);
+/*
+app.post("/volume/:volumeID", (req, res) => {
+    http_req(make_options
 });
+*/
 
 /* @module app */
 module.exports = app;

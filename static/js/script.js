@@ -4,8 +4,8 @@
  * @author Gautam Ramasubramanian
  */
 
-var host = "https://goggle-books.herokuapp.com";
-//var host = "http://localhost:3000";
+//var host = "https://goggle-books.herokuapp.com";
+var host = "http://localhost:3000";
 var index_url = host + "/";
 var welcome_url = host + "/welcome";
 var search_url = host + "/search";
