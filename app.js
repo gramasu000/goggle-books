@@ -52,16 +52,17 @@ app.post("/welcome", (req, res) => {
 });
 
 const http_req = require("request");
+
 const search_api = require("./api-search"); 
 app.post("/search", (req, res) => {
     http_req(search_api.make_options(req), search_api.make_callback(res));
 });
 
-/*
+
 app.post("/volume/:volumeID", (req, res) => {
-    http_req(make_options
+    res.send("Info for " + req.params["volumeID"]);
 });
-*/
+
 
 /* @module app */
 module.exports = app;
