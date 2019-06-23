@@ -3,15 +3,12 @@
     Templating Language - PugJS
     Author - Gautam Ramasubramanian
 
-mixin volume(title, author, publisher, link, imglink)
-    li
-        a(href=link)
-            img(src=imglink)
-            div
-                h1 title
-                h2 author
-                p publisher
-
 ul(id="results")
-    each val in data.items
-        +volume(val["volumeInfo"]["title"], val["volumeInfo"]["authors"][0], val["volumeInfo"]["publisher"], val["previewLink"], val["imageLinks"]["thumbnail"]) 
+    each item in data
+        li
+            a(href=item.infolink)
+                img(src=item.thumbnail) 
+                div
+                    h1=item.title
+                    h2=item.authors
+                    p=item.publisher

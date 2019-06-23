@@ -96,29 +96,89 @@ footer > a {
     }
 }
 
-#content h1 { 
+#content > h1 { 
     @apply mb-6; 
     @apply text-gray-700 text-2xl; 
 }
 
-#content p {
+#content > p {
     @apply text-gray-700 text-sm;
 }
 
-@screen sm {
-    #content h1 { @apply text-3xl; }
+#results {
+    @apply w-full
 }
+
+#results > li {
+    @apply w-full
+}
+
+#results > li > a {
+    @apply flex items-center justify-between;
+    @apply m-5;
+    @apply rounded-lg;
+    @apply bg-gray-200;
+    @apply border-solid border-2 border-gray-500;
+}
+
+#results > li > a:hover {
+    @apply shadow-lg;
+}
+
+#results > li > a > img {
+    @apply w-16 h-20;
+    @apply mr-2 ml-1 my-1;    
+}
+
+#results > li > a > div {
+    @apply flex-1; 
+    @apply h-20;
+    @apply text-left;
+    @apply py-2 pr-2;
+    @apply truncate;
+}
+
+#results > li > a > div > h1 {
+    @apply block;
+    @apply text-sm font-bold;
+    @apply truncate;
+}
+
+#results > li > a > div > h2 {
+    @apply block;
+    @apply text-xs italic;
+    @apply truncate;
+}
+
+#results > li > a > div > p {
+    @apply block;
+    @apply text-xs;
+    @apply truncate;
+} 
 
 @screen md {
-    #content p { @apply text-lg; }
-    #content h1 { @apply text-4xl; }
-}
-
-@screen lg {
-    #content h1 { @apply text-5xl; }
+    #content > p { @apply text-lg; }
+    #content > h1 { @apply text-4xl; }
+    #results > li > a > img {
+        @apply w-32 h-40;
+        @apply mr-10 ml-4 my-4;    
+    }
+    #results > li > a > div {
+        @apply h-40;
+        @apply py-3; 
+    }
+    #results > li > a > div > h1 {
+        @apply text-2xl; 
+    }
+    #results > li > a > div > h2 {
+        @apply text-xl;
+    }
+    #results > li > a > div > p {
+        @apply text-lg;
+    } 
 }
 
 @screen xl {
-    #content p { @apply text-xl; }
-    #content h1 { @apply text-6xl; }
+    #content > p { @apply text-xl; }
+    #content > h1 { @apply text-6xl; }
 }

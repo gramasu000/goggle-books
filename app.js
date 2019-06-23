@@ -42,16 +42,46 @@ function make_options(req) {
         qs: {
             q: req.query.query,
             key: "AIzaSyCoxEfQQzTGEyZeoKM8udfBdt1JOuEK16E",
-            maxResults: 40,
+            maxResults: 10,
             maxAllowedMaturityRating: "not-mature",
             startIndex: 0
         }
     };
 }
 
+function get_data(body) {
+    let data = [];
+    if (body.items) {
+        for (let item of body.items) {
+            let info = item["volumeInfo"];
+            let title = info["title"] || "Title not known";
+            let publisher = info["publisher"] || "Publisher not known";
+            let infolink = info["infoLink"] || "#";
+            let authors = "Authors not known";
+            if (info["authors"]) {
+                authors = info["authors"].join(", ");
+            }
+            let thumbnail = "https://image.flaticon.com/icons/svg/149/149374.svg";
+            if (info["imageLinks"]) {
+                thumbnail = Object.values(info["imageLinks"]).slice(-1)[0]; 
+            }
+            data.push ({
+                title: title,
+                authors: authors,
+                publisher: publisher,
+                thumbnail: thumbnail,
+                infolink: infolink
+            });
+        }
+    } 
+    return data;
+}
+
+
 function make_callback(res) {
-    return function (error, response, body) {
-        res.send(body);
+    return function (err, resp, body) {
+        let data = get_data(body);
+        res.render("list", { data: data });
     }
 }
 
