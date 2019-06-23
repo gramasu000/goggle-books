@@ -42,6 +42,13 @@ function get_thumbnail(info, obj) {
     }
 }
 
+function get_id(item, obj) {
+    obj.id = "no-result";
+    if (item["id"]) {
+        obj.id = item["id"];
+    }
+}
+
 function get_data(body) {
     let data = [];
     if (body.items) {
@@ -52,6 +59,7 @@ function get_data(body) {
             get_authors(info, obj);
             get_publisher(info, obj);
             get_thumbnail(info, obj);
+            get_id(item, obj);
             data.push(obj);
         }
     } 
