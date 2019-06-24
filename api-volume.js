@@ -239,8 +239,8 @@ function get_details(body) {
     let info = body["volumeInfo"];
     let access = body["accessInfo"];
     add_title(info, data);
-    add_img(info, data);
     add_subtitle(info, data);
+    add_img(info, data);
     add_authors(info, data);
     add_description(info, data);
     add_id(body, data);

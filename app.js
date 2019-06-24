@@ -23,7 +23,7 @@ app.set("view engine", "pug");
 const redirect = require("heroku-ssl-redirect");
 
 /** Use HTTPS redirect middleware in application - to redirect HTTP connections to HTTPS */
-//app.use(redirect());
+app.use(redirect());
 
 /** @const path module */
 const path = require("path");
