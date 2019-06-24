@@ -16,7 +16,7 @@ var max_results = 10;
 
 
 function getQueryURL() {
-    var query = document.querySelector("header > form > input[type=text]").value;
+    var query = document.querySelector("header > div > input[type=text]").value;
     console.log("Text Query: " + query);
     saved_query = query.split(" ").join("+");
     console.log("URL Query Argument: " + saved_query);
@@ -41,29 +41,34 @@ function loadResponse(req) {
         window.scrollTo(0,0);
     };
 
-    var setPreviousButtonIfExists = function () { 
-        if (document.querySelector("#prev")) {
-            document.querySelector("#prev").onclick = previousPage;
+    var setPageButtons = function () {
+        var prev = document.querySelector("#prev");
+        var next = document.querySelector("#next");
+        var results = document.querySelector("#results");
+        var no_results = document.querySelector("#no-results");
+        var details = document.querySelector("#details");
+        var no_details = document.querySelector("#no-details");
+    
+        if (prev && results || prev && no_results) {
+            prev.onclick = previousPage;
             if (start_index === 0) {
-                document.querySelector("#prev").disabled = true;
+                prev.disabled = true;
             } else {
-                document.querySelector("#prev").disabled = false;
+                prev.disabled = false;
             }
+        } else if (prev && details || prev && no_details) {
+            prev.onclick = currentPage;
+            prev.disabled = false;
+        }
+
+        if (next && no_results || next && details || next && no_details) {
+            next.disabled = true;
+        } else if (next && results) {
+            next.onclick = nextPage
+            next.disabled = false;
         }
     };
     
-    var setNextButtonIfExists = function () {
-        if (document.querySelector("#next")) {
-            document.querySelector("#next").onclick = nextPage;
-            if (document.querySelector("#no-results")) {
-                document.querySelector("#next").disabled = true;
-            } else {
-                document.querySelector("#next").disabled = false;
-            }
-        }
-        
-    };
-   
     var setResultLinks = function () {
         var results = document.querySelectorAll("#results > li > a");
         for (var i = 0; i < results.length; i++) { 
@@ -73,8 +78,7 @@ function loadResponse(req) {
 
     return function () {
         setContent(req);
-        setPreviousButtonIfExists();
-        setNextButtonIfExists();
+        setPageButtons();
         setResultLinks();
     };
 }
@@ -110,8 +114,16 @@ function previousPage() {
     getContent(query_url);
 }
 
+var ENTER = 13
+
 window.onload = function () {
     console.log("Loading Page. Setting Welcome Content and linking button onclick function.\n")
     getContent(welcome_url);
     document.querySelector("header > button").onclick = searchQuery;
+    document.querySelector("header > div > input").addEventListener("keypress", function (event) {
+        if (event.keyCode === ENTER) {
+            searchQuery();
+        }
+    });
+
 }

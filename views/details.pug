@@ -1,0 +1,32 @@
+//-
+    Template for list of volume details page - to be inserted in html
+    Templating Language - PugJS
+    Author - Gautam Ramasubramanian
+
+ul(id="details")
+    each obj in data
+        li
+            div
+                if obj.img
+                    img(src=obj.img)
+                if obj.value
+                    p!= "<b>" + obj.label + "</b>" + obj.value
+                if obj.values
+                    p!= "<b>" + obj.label + "</b>"
+                    each obj2 in obj.values
+                        if obj2.label
+                            div
+                                p!= "<b>" + obj2.label + "</b>" + obj2.value
+                            br
+                        else if obj2.link
+                            a(href=obj2.link)
+                                p!= obj2.value
+                            br
+                        else
+                            div
+                                p!= obj2.value
+                            br
+        br
+div(id="change-page")
+    button(id="prev") Previous Page
+    button(id="next") Next Page

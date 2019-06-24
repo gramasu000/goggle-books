@@ -58,11 +58,10 @@ app.post("/search", (req, res) => {
     http_req(search_api.make_options(req), search_api.make_callback(res));
 });
 
-
-app.post("/volume/:volumeID", (req, res) => {
-    res.send("Info for " + req.params["volumeID"]);
+const volume_api = require("./api-volume");
+app.post("/volume/:volumeId", (req, res) => {
+    http_req(volume_api.make_options(req), volume_api.make_callback(res));
 });
-
 
 /* @module app */
 module.exports = app;
