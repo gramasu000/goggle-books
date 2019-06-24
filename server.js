@@ -28,6 +28,7 @@ function initialize_port() {
 
 /** @const port number */
 const port = initialize_port();
+console.log("Test");
 
 /** Create an http server instance */
 let server = http.createServer(app)
