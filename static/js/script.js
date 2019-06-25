@@ -27,7 +27,7 @@ var max_results = 10;
 function getQueryURL() {
     var query = document.querySelector("header > div > input[type=text]").value;
     console.log("Text Query: " + query);
-    saved_query = query.split(" ").join("+");
+    saved_query = encodeURIComponent(query);
     console.log("URL Query Argument: " + saved_query);
     var query_url = search_url + "?q=" + saved_query + "&startIndex=" + start_index + "&maxResults=" + max_results;
     console.log("Full Query URL: " + query_url);
