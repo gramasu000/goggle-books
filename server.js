@@ -9,10 +9,10 @@
 
 "use strict"
 
-/** @const http module */
+/** @const http - Built-in HTTP module */
 const http = require("http");
 
-/** @const app module */
+/** @const app - ExpressJS instance defined in app.js */
 const app = require("./app");
 
 /** 
@@ -26,13 +26,13 @@ function initialize_port() {
     return env_port || 3000;
 }
 
-/** @const port number */
+/** @const port - Get port number, by default or by environment */
 const port = initialize_port();
 
-/** Create an http server instance */
+/** Create an http server instance and feed the expressJS app into it */
 let server = http.createServer(app)
 
-/** Set server to listen to port */
+/** Set server to listen to port, pass a callback which logs the event */
 server.listen(port, () => { 
     console.log(`Application server listening to port ${port}`);
 });

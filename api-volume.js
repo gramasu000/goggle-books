@@ -1,4 +1,17 @@
+/**
+ * @fileoverview Handles querying and data processing associated with the Google Books API Volume Retrieval 
+ *
+ * @author Gautam Ramasubramanian
+ */
+"use strict"
 
+/** 
+ * Return a request options object detailing the url and other information
+ *  associated with Google API volume retrieval
+ * 
+ * @param {object} req ExpressJS request object
+ *
+ */
 function make_options(req) {
     return {
         uri: "https://www.googleapis.com/books/v1/volumes/" + req.params["volumeId"],
@@ -9,6 +22,17 @@ function make_options(req) {
         }
     };
 }
+
+
+/**
+ * Converts a camel-case to space delimited group of words, with the first word capitalized.
+ *  Useful for converting a key in the JSON object to a label in the served HTML
+ *  Stolen from @link{https://stackoverflow.com/questions/7225407/convert-camelcasetext-to-sentence-case-text/38635498 Convert camelCaseText to Sentence Case Text}
+ *
+ * @param {string} string String in camel case
+ *
+ * @returns {string} String in Sentence Case, delimited by white space, and first letter of first word capitalized.
+ */
 function convert(string) {
     // From Stack Overfow
     let new_string = string.replace(/([A-Z])/g, " $1");
@@ -17,6 +41,13 @@ function convert(string) {
     // From Stack Overflow
 }
 
+
+/** 
+ * Get image data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_img(info, data) {
     let obj = {
         img: "https://image.flaticon.com/icons/svg/149/149374.svg"
@@ -27,6 +58,12 @@ function add_img(info, data) {
     data.push(obj);
 }
 
+/** 
+ * Get title data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_title(info, data) {
     if (info["title"]) {
         let obj = { 
@@ -37,6 +74,12 @@ function add_title(info, data) {
     }
 }
 
+/** 
+ * Get subtitle data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_subtitle(info, data) {
     if (info["subtitle"]) {
         let obj = {
@@ -47,8 +90,14 @@ function add_subtitle(info, data) {
     }
 }
 
+/** 
+ * Get authors data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_authors(info, data) {
-    if (info["authors"]) {
+    if (info["authors"] && info["authors"].length > 0) {
         let obj = {};
         if (info["authors"].length === 1) {
             obj.label = "Author";
@@ -56,7 +105,7 @@ function add_authors(info, data) {
             obj.label = "Authors";
         }
         obj.values = [];
-        for (author of info["authors"]) {
+        for (let author of info["authors"]) {
             let obj2 = {
                 value: author,
             }
@@ -66,6 +115,12 @@ function add_authors(info, data) {
     }
 }
 
+/** 
+ * Get publisher data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_publisher(info, data) {
     if (info["publisher"]) {
         let obj = {
@@ -76,6 +131,12 @@ function add_publisher(info, data) {
     }
 }
 
+/** 
+ * Get publishing date data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_publish_date(info, data) {
     if (info["publishedDate"]) {
         let obj = {
@@ -86,6 +147,12 @@ function add_publish_date(info, data) {
     }
 }
 
+/** 
+ * Get description data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_description(info, data) {
     if (info["description"]) {    
         let obj = {
@@ -96,6 +163,12 @@ function add_description(info, data) {
     }
 }
 
+/** 
+ * Get ISBN numbers from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_identifiers(info, data) {
     if (info["industryIdentifiers"]) {
         let obj = {}
@@ -105,7 +178,7 @@ function add_identifiers(info, data) {
             obj.label = "Identifiers";
         }
         obj.values = [];
-        for (id of info["industryIdentifiers"]) {
+        for (let id of info["industryIdentifiers"]) {
             let obj2 = {
                 label: id["type"].split("_").join(" ") + ": ",
                 value: id["identifier"]
@@ -116,6 +189,12 @@ function add_identifiers(info, data) {
     }
 }
 
+/** 
+ * Get category data from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_categories(info, data) {
     if (info["categories"]) {
         let obj = {};
@@ -125,7 +204,7 @@ function add_categories(info, data) {
             obj.label = "Categories";
         }
         obj.values = [];
-        for (category of info["categories"]) {
+        for (let category of info["categories"]) {
             let obj2 = {
                 value: category,
             }
@@ -135,6 +214,12 @@ function add_categories(info, data) {
     }
 }
 
+/** 
+ * Get image links from info (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_img_links(info, data) {
     if (info["imageLinks"]) {
         let obj = {};
@@ -158,6 +243,13 @@ function add_img_links(info, data) {
     }
 }
 
+/** 
+ * Get preview, info, webreader, and volume links from info and access (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} access "accessInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_links(info, access, data) {
     let prevL = info["previewLink"];
     let infoL = info["infoLink"];
@@ -203,6 +295,12 @@ function add_links(info, access, data) {
     }
 }
 
+/** 
+ * Get ebook access information from access (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} access "accessInfo" property of JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_ebook(access, data) {
     let epub = access["epub"]["isAvailable"];
     let pdf = access["pdf"]["isAvailable"];
@@ -224,6 +322,12 @@ function add_ebook(access, data) {
     }
 }
 
+/** 
+ * Get Google ID from body (if it exists), store it in an object, and push object in data array
+ *
+ * @param {object} body entire JSON object retrieved from Google API
+ * @param {object} data Array of details for a particular volume
+ */
 function add_id(body, data) {
     if (body["id"]) {
         let obj = {
@@ -234,6 +338,14 @@ function add_id(body, data) {
     }
 }
 
+/** 
+ * Take in an input the JSON object retrieved from Google API, and process it
+ *  to return data, an array of objects containing the data we want to present to application user
+ *
+ * @param {object} body entire JSON object retrieved from Google API
+ *
+ * @return {object} data Array of details for a particular volume
+ */
 function get_details(body) {
     let data = [];
     let info = body["volumeInfo"];
@@ -254,6 +366,15 @@ function get_details(body) {
     return data;
 }
 
+
+/* 
+ * Return a callback function which request module can use to 
+ *  convert the retrieved json data from Google, process it and send html to the application user
+ *
+ *  @param {object} res - ExpressJS response object
+ *
+ *  @returns {function} Callback function for request module
+ */
 function make_callback(res) {
     return function(err, resp, body) {
         let data = get_details(body);
@@ -265,6 +386,9 @@ function make_callback(res) {
     }
 }
 
+/* @module 
+ * An object which encapsulates the make_options and make_callback functions in this file
+ */
 module.exports = {
     make_options: make_options,
     make_callback: make_callback

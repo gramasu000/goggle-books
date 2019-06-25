@@ -1,4 +1,18 @@
+/**
+ * @fileoverview Handles querying and data processing associated with the Google Books API Query Search   
+ *
+ * @author Gautam Ramasubramanian
+ */
+"use strict"
 
+/** 
+ * Return a request options object detailing the url and other information
+ *  associated with the Google Books API search.
+ * 
+ * @param {object} req ExpressJS request object 
+ *
+ * @returns {object}  Request options object for Google Books API Search
+ */
 function make_options(req) {
     return {
         uri: "https://www.googleapis.com/books/v1/volumes",
@@ -14,6 +28,12 @@ function make_options(req) {
     };
 }
 
+/** 
+ * Get book title data from info (if it exists) and store it in obj
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} obj Object which represented a particular volume (to be shown in search results webpage)
+ */
 function get_title(info, obj) {
     obj.title = "Title not known";
     if (info["title"]) {
@@ -21,6 +41,13 @@ function get_title(info, obj) {
     }
 }
 
+/** 
+ * Get authors array data from info (if it exists) and store it in obj
+ *  Join all the authors in a comma-separated string
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} obj Object which represented a particular volume (to be shown in search results webpage)
+ */
 function get_authors(info, obj) {
     obj.authors = "Authors not known";
     if (info["authors"]) {
@@ -28,6 +55,12 @@ function get_authors(info, obj) {
     }
 }
 
+/** 
+ * Get publisher array data from info (if it exists) and store it in obj
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} obj Object which represented a particular volume (to be shown in search results webpage)
+ */
 function get_publisher(info, obj) {
     obj.publisher = "Publisher not known";
     if (info["publisher"]) {
@@ -35,6 +68,14 @@ function get_publisher(info, obj) {
     }
 }
 
+/** 
+ * Get image link from info (if it exists) and store it in obj
+ *  Get image link of largest size - imagelink object orders links in increasing size,
+ *      so get the last link.
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} obj Object which represented a particular volume (to be shown in search results webpage)
+ */
 function get_thumbnail(info, obj) {
     obj.thumbnail = "https://image.flaticon.com/icons/svg/149/149374.svg";
     if (info["imageLinks"]) {
@@ -42,6 +83,12 @@ function get_thumbnail(info, obj) {
     }
 }
 
+/** 
+ * Get Google ID from info (if it exists) and store it in obj
+ *
+ * @param {object} info "volumeInfo" property of JSON object retrieved from Google API
+ * @param {object} obj Object which represented a particular volume (to be shown in search results webpage)
+ */
 function get_id(item, obj) {
     obj.id = "no-result";
     if (item["id"]) {
@@ -49,6 +96,15 @@ function get_id(item, obj) {
     }
 }
 
+
+/** 
+ * Take in as input the JSON object retrieved from Google API, and process it to
+ *  return data, an array of objects containing the data we want to present to application user
+ *
+ * @param {object} body JSON object retrieved from Google API
+ *
+ * @returns {object} data Array of volumes (results from search), each volume is an object containing the title, authors, publisher, thumbnail link and Google ID 
+ */
 function get_data(body) {
     let data = [];
     if (body.items) {
@@ -67,7 +123,14 @@ function get_data(body) {
 }
 
 
-
+/* 
+ * Return a callback function which request module can use to 
+ *  convert the retrieved json data from Google, process it and send html to the application user
+ *
+ *  @param {object} res - ExpressJS response object
+ *
+ *  @returns {function} Callback function for request module
+ */
 function make_callback(res) {
     return function (err, resp, body) {
         let data = get_data(body);
@@ -79,6 +142,9 @@ function make_callback(res) {
     }
 }
 
+/* @module 
+ * An object which encapsulates the make_options and make_callback functions in this file
+ */
 module.exports = {
     make_options: make_options,
     make_callback: make_callback
