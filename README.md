@@ -8,6 +8,23 @@ The output from there will be redirected back to the user in a pretty format.
 
 ## Timeline
 
+### 06-25-19, 06-26-19 - Testing, Logging, Documentation
+
+ - Updated README Timeline, Project Structure
+ - Condensed existing tests and created more tests
+
+### 06-24-19 - Deployed new application on Heroku
+
+### 06-23-19 - Created /volume/(id) endpoint
+
+ - Allow users to click on a search result and open a page with details on that book.
+ - Created mockups for details page
+ - Made Search Result pages - split results into more than one page. 
+
+### 06-22-19 - Created /search endpoint
+ 
+ - App allows the user to type in a search query, press "Search" and get a list of results
+
 ### 06-20-19, 06-21-19 - Made more User Interface Tests
 
  - Stopped using ZombieJS as ZombieJS does not run client-side javascript properly.
