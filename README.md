@@ -6,6 +6,49 @@ The purpose of this web application is to allow the user to search for books tha
 The user types in a search query, and then the application forwards the query to the Google Books REST API.
 The output from there will be redirected back to the user in a pretty format.
 
+## Link
+
+The app is currently deployed on Heroku as of 06-26-19 and is available at the following link.
+
+<https://goggle-books.herokuapp.com>
+
+## Project Structure
+
+The directory structure of the project is as follows.
+
+.
++-- notes+mockups/
+|   +-- mockups/
+|   |   +-- (some html files which serve as mockups for webpages in application)
+|   +-- img/
+|   |   +-- (images of mockups to display in README)
+|   +-- img2/
+|   |   +-- (images of application to display in README)
+|   +-- handwritten-notes.pdf (Handwritten notes taken on my BOOX device)
++-- server.js (Configures an HTTP Server with ExpressJS application)
++-- app.js (Instantiates an Express Application with /, /welcome, /search and /volume endpoints)
++-- api-search.js (Handles HTTP request to Google API for query searching)
++-- api-volume.js (Handles HTTP request to Google API for volume/book details retrieval)
++-- static/ (Static Files which are NOT served in express application)
+|   +-- css/
+|   |   +-- style.css (Coded Stylesheet using TailwindCSS directives)
+|   |   +-- output.css (Minified stylesheet after processing - `npm run build:css`)
+|   +-- js/
+|   |   +-- script.js (Coded javascript script file for client - handles onclick functionality of html buttons)
+|   |   +-- output.js (Minified script file after processing - `npm run build:js`)
++-- public/ (Static Files which ARE served in express application
+|   +-- style.min.css (Copy of static/css/output.css)
+|   +-- script.min.js (Copy of static/js/output.js)
++-- views/ (Templates for Pug Template engine)
+|   +-- index.pug (Template served at / endpoint)
+|   +-- welcome.pug (Template served at /welcome endpoint)
+|   +-- results.pug (Template served at /search endpoint if there are search results)
+|   +-- no-results.pug (Template served at /search endpoint if there are no search results)
+|   +-- details.pug (Template served at /volume/(id) endpoint if there are volume details available)
+|   +-- no-details.pug (Template served at /search endpoint if there are no volume details available)
++-- test/
+|   +-- (User interface testing using MochaJS/NightmareJS)
+
 ## Timeline
 
 ### 06-25-19, 06-26-19 - Testing, Logging, Documentation
@@ -21,9 +64,15 @@ The output from there will be redirected back to the user in a pretty format.
  - Created mockups for details page
  - Made Search Result pages - split results into more than one page. 
 
+<img src="notes+mockups/img2/final_details_desktop.png" width=600px /><img src="notes+mockups/img2/final_details_mobile.png" width=200px />
+<img src="notes+mockups/img2/final_details_desktop_2.png" width=600px /><img src="notes+mockups/img2/final_details_mobile_2.png" width=200px />
+
 ### 06-22-19 - Created /search endpoint
  
  - App allows the user to type in a search query, press "Search" and get a list of results
+
+<img src="notes+mockups/img2/final_results_desktop.png" width=600px /><img src="notes+mockups/img2/final_results_mobile.png" width=200px />
+
 
 ### 06-20-19, 06-21-19 - Made more User Interface Tests
 
