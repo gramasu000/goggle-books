@@ -20,16 +20,21 @@ describe("Nightmare visits https://goggle-books.herokuapp.com", function() {
 
     let browser;
 
-    /** Before each test, instantiate a new browser instance*/
-    beforeEach(function () {
+    /** Before running this suite, make a browser instance, go to website */
+    before(function () {
         browser = new Nightmare();
+        browser.goto("https://goggle-books.herokuapp.com")
+            .wait("body")
     });
 
-    /** Visit the webpage and make sure that there is no error */
+    /** Make sure 2+2 = 4 according to assert */
+    it("Sanity Check (2+2=4)", () => {
+        assert.strictEqual(2+2, 4);
+    });
+
+    /** Make sure website is loaded without error */
     it("Index page should load without error", function (done) {
-        browser.goto("https://goggle-books.herokuapp.com")
-            .wait(200)
-            .end()
+        browser.end()
             .then((res) => { done(); })
             .catch(done);
     });
