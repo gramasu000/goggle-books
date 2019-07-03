@@ -12,6 +12,17 @@ The app is currently deployed on Heroku as of 06-26-19 and is available at the f
 
 <https://goggle-books.herokuapp.com>
 
+## Run Locally
+
+If you want to run the project locally, all you need to do is to clone the project, install the dependencies specified
+in the package.json file and run the start script.
+
+```
+$ git clone https://github.com/gramasu000/goggle-books.git && cd goggle-books/
+$ npm install
+$ npm start
+```
+
 ## Project Structure
 
 The directory structure of the project is as follows.
@@ -19,6 +30,11 @@ The directory structure of the project is as follows.
 <img src="notes+mockups/project-structure.png" width=800px />
 
 ## Timeline
+
+### 07-02-19 - Removed Hostname from script file urls
+
+ - Although this is a small action, this allows us to run the same script file for both development and production environments without changes.
+ - Now, whether this project is on a laptop, or on a Heroku server, the command `npm start` should get the project running regardless.
 
 ### 06-25-19, 06-26-19 - Testing, Logging, Documentation
 
