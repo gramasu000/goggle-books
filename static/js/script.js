@@ -5,12 +5,12 @@
  */
 
 /** Variables holding urls of site */
-var host = "https://goggle-books.herokuapp.com";
+//var host = "https://goggle-books.herokuapp.com";
 //var host = "http://localhost:3000";
-var index_url = host + "/";
-var welcome_url = host + "/welcome";
-var search_url = host + "/search";
-var volume_url = host + "/volume";
+var index_url = "/";
+var welcome_url = "/welcome";
+var search_url = "/search";
+var volume_url = "/volume";
 
 /** Query String for URL*/
 var saved_query = "";
