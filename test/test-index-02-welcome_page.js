@@ -14,7 +14,7 @@ const Nightmare = require("nightmare");
 const assert = require("assert");
 
 /** Test whether GET, / endpoint serves webpage properly */
-describe("Nightmare tests https://goggle-books.herokuapp.com index/welcome page", function() {
+describe("Nightmare tests https://goggle-books.herokuapp.com index page", function() {
     
     this.timeout("15s");
 
@@ -167,7 +167,7 @@ describe("Nightmare tests https://goggle-books.herokuapp.com index/welcome page"
             browser = new Nightmare();
             browser.goto("https://goggle-books.herokuapp.com")
                 .wait(200)
-                .evaluate(() => document.querySelectorAll("#content"))
+                .evaluate(() => document.querySelectorAll("#content").length)
         });
 
         it("Index page #content div exists and is unique", function (done) {
