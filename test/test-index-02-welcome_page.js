@@ -14,16 +14,85 @@ const Nightmare = require("nightmare");
 const assert = require("assert");
 
 /** Test whether GET, / endpoint serves webpage properly */
-describe("Nightmare tests https://goggle-books.herokuapp.com welcome page", function() {
+describe("Nightmare tests https://goggle-books.herokuapp.com index/welcome page", function() {
     
     this.timeout("15s");
 
     let browser;
 
-    /** Before each test, instantiate a new browser instance*/
-    beforeEach(function () {
-        browser = new Nightmare();
-    });
+    describe("Nightmare tests basic functionality of header", function () {
+        
+        beforeEach(function () {
+            browser = new Nightmare();
+            browser.goto("https://goggle-books.herokuall.com")
+                .wait(200)
+                .evaluate(() => {
+                    let array = [];
+                    array.push(document.querySelectorAll("header").length);
+                    array.push(document.querySelectorAll("header span").length);
+                    array.push(document.querySelectorAll("header span").innerHTML);
+                    array.push(document.querySelectorAll("header input[type='text']").length);
+                    array.push(document.querySelectorAll("header button").length);
+                    array.push(document.querySelectorAll("header button").innerHTML);
+                    return array;
+                });
+        });
+
+        it("Index Page header exists and is unique", function (done) {
+            browser.end()
+                .then((array) => {
+                    let num_header_elements = array[0];
+                    assert.strictEqual(num_header_elements, 1);
+                    done();
+                }).catch(done);
+        });
+
+        it("Website 'logo' exists, is unique, and located in the header", function (done) {
+            browser.end()
+                .then((array) => {
+                    let num_header_span_elements = array[1];
+                    assert.strictEqual(num_header_span_elements, 1);
+                    done();
+                }).catch(done);
+        });
+
+        it("Website 'logo' has text - i.e. it is not empty", function (done) {
+            browser.end()
+                .then((array) => {
+                    let header_span_text = array[2];
+                    assert.notEqual(header_span_text, "");
+                    done();
+                }).catch(done);
+        });
+
+        it("Text Search Input must exist in header, and must be unique", function (done) {
+            browser.end()
+                .then((array) => {
+                    let num_input_elements = array[3];
+                    assert.strictEqual(num_input_elements, 1);
+                    done();
+                }).catch(done);
+        });
+
+        it("Search button must exist in header, and must be unique", function (done) {
+            browser.end()
+                .then((array) => {
+                    let num_button_elements = array[4];
+                    assert.strictEqual(num_button_elements, 1);
+                    done();
+                }).catch(done);
+        });
+
+        it("Search button has text - i.e. it is not empty", function (done) {
+            browser.end()
+                .then((array) => {
+                    let button_text = array[5];
+                    assert.notEqual(button_text, "");
+                    done();
+                }).catch(done);
+        });
+
+    })
 
     it("All html sub-elements of header should exist, be unique and have the appropriate value", function (done) {
         browser.goto("https://goggle-books.herokuapp.com")
