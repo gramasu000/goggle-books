@@ -28,68 +28,52 @@ describe("Nightmare tests https://goggle-books.herokuapp.com empty search", func
                 .wait("header input")
                 .type("header input", "")
                 .click("header button")
-                .wait(200)
-                .evaluate(() => {
-                    let array = [];
-                    array.push(document.querySelectorAll("header").length);
-                    array.push(document.querySelectorAll("header span").length);
-                    array.push(document.querySelector("header span").innerHTML);
-                    array.push(document.querySelectorAll("header input[type='text']").length);
-                    array.push(document.querySelectorAll("header button").length);
-                    array.push(document.querySelector("header button").innerHTML);
-                    return array;
-                });
+                .wait("#no-results");
         });
 
         it("After empty search, header exists and is unique", function (done) {
-            browser.end()
-                .then((array) => {
-                    let num_header_elements = array[0];
+            browser.evaluate(() => document.querySelectorAll("header").length)
+                .then((num_header_elements) => {
                     assert.strictEqual(num_header_elements, 1);
                     done();
                 }).catch(done);
         });
 
         it("After empty search, website 'logo' exists, is unique, and located in the header", function (done) {
-            browser.end()
-                .then((array) => {
-                    let num_header_span_elements = array[1];
+            browser.evaluate(() => document.querySelectorAll("header span").length)
+                .then((num_header_span_elements) => {
                     assert.strictEqual(num_header_span_elements, 1);
                     done();
                 }).catch(done);
         });
 
-        it("Website 'logo' has text - i.e. it is not empty", function (done) {
-            browser.end()
-                .then((array) => {
-                    let header_span_text = array[2];
+        it("After empty search, website 'logo' has text - i.e. it is not empty", function (done) {
+            browser.evaluate(() => document.querySelector("header span").innerHTML)
+                .then((header_span_text) => {
                     assert.notEqual(header_span_text, "");
                     done();
                 }).catch(done);
         });
 
-        it("After empty search the text search input must exist in header, and must be unique", function (done) {
-            browser.end()
-                .then((array) => {
-                    let num_input_elements = array[3];
+        it("After empty search, the text search input must exist in header, and must be unique", function (done) {
+            browser.evaluate(() => document.querySelectorAll("header input[type='text']").length)
+                .then((num_input_elements) => {
                     assert.strictEqual(num_input_elements, 1);
                     done();
                 }).catch(done);
         });
 
         it("After empty search, the search button must exist in header and must be unique", function (done) {
-            browser.end()
-                .then((array) => {
-                    let num_button_elements = array[4];
+            browser.evaluate(() => document.querySelectorAll("header button").length)
+                .then((num_button_elements) => {
                     assert.strictEqual(num_button_elements, 1);
                     done();
                 }).catch(done);
         });
 
-        it("Search button has text - i.e. it is not empty", function (done) {
-            browser.end()
-                .then((array) => {
-                    let button_text = array[5];
+        it("After empty search, search button has text - i.e. it is not empty", function (done) {
+            browser.evaluate(() => document.querySelector("header button").innerHTML)
+                .then((button_text) => {
                     assert.notEqual(button_text, "");
                     done();
                 }).catch(done);
@@ -107,44 +91,58 @@ describe("Nightmare tests https://goggle-books.herokuapp.com empty search", func
                 .wait("header input")
                 .type("header input", "")
                 .click("header button")
-                .wait(200)
-                .evaluate(() => {
-                    let array = [];
-                    array.push(document.querySelectorAll("footer").length);
-                    array.push(document.querySelectorAll("footer a").length);
-                    array.push(document.querySelector("footer a").href)
-                    return array;
-                });
+                .wait("#no-results");
         });
 
         it("After empty search, footer exists and is unique", function (done) {
-            browser.end()
-                .then((array) => {
-                    let num_footer_elements = array[0];
+            browser.evaluate(() => document.querySelectorAll("footer").length)
+                .then((num_footer_elements) => {
                     assert.strictEqual(num_footer_elements, 1);
                     done();
                 }).catch(done);
         });
 
         it("After empty search, footer has a hyperlink", function (done) {
-            browser.end()
-                .then((array) => {
-                    let num_footer_hyperlink_elements = array[1];
+            browser.evaluate(() => document.querySelectorAll("footer a").length)
+                .then((num_footer_hyperlink_elements) => {
                     assert.strictEqual(num_footer_hyperlink_elements, 1);
                     done();
                 }).catch(done);
         });
 
         it("After empty search, footer hyperlink links to github profile page", function (done) {
-            browser.end()
-                .then((array) => {
-                    let hyperlink_link = array[2];
+            browser.evaluate(() => document.querySelector("footer a").href)
+                .then((hyperlink_link) => {
                     assert.strictEqual(hyperlink_link, "https://github.com/gramasu000");
                     done();
                 }).catch(done);
         });
 
     });
+
+    describe("After empty search, footer link still works", function() {
+        
+        before(function () {
+            browser = new Nightmare();
+            browser.goto("https://goggle-books.herokuapp.com")
+                .wait("header input")
+                .type("header input", "")
+                .click("header button")
+                .wait("#content h1")
+                .click("footer > a")
+                .wait("body");
+        });
+
+        it("After empty search, the footer hyperlink, when clicked, should direct browser to proper location", function (done) {
+            browser.evaluate(() => document.URL)
+                .then((url) => {
+                    assert.strictEqual(url, "https://github.com/gramasu000");
+                    done();
+                }).catch(done);
+        });
+
+    });
+
 
 
     describe("Nightmare tests #content div after empty search", function () {
@@ -155,36 +153,29 @@ describe("Nightmare tests https://goggle-books.herokuapp.com empty search", func
                 .wait("header input")
                 .type("header input", "")
                 .click("header button")
-                .wait(200)
-                .evaluate(function () {
-                    let array = [];
-                    array.push(document.querySelectorAll("#content").length);
-                    array.push(document.querySelectorAll("#content #results").length);
-                    array.push(document.querySelectorAll("#content #no-results").length);
-                    return array;
-                });
+                .wait("#no-results");
         });
 
         it("After empty search, #content div exists and is unique", function (done) {
-            browser.end()
-                .then((array) => {
-                    assert.strictEqual(array[0], 1);
+            browser.evaluate(() => document.querySelectorAll("#content").length)
+                .then((num_content_elements) => {
+                    assert.strictEqual(num_content_elements, 1);
                     done();
                 }).catch(done);
         });
 
         it("After empty search, #results div does not exist - as there are no results", function (done) {
-            browser.end()
-                .then((array) => {
-                    assert.strictEqual(array[1], 0);
+            browser.evaluate(() => document.querySelectorAll("#content #results").length)
+                .then((num_result_elements) => {
+                    assert.strictEqual(num_result_elements, 0);
                     done();
                 }).catch(done);
         });
 
         it("After empty search, #no-results div exist and is unique - showing message that there are no results", function (done) {
-            browser.end()
-                .then((array) => {
-                    assert.strictEqual(array[2], 1);
+            browser.evaluate(() => document.querySelectorAll("#content #no-results").length)
+                .then((num_no_results_elements) => {
+                    assert.strictEqual(num_no_results_elements, 1);
                     done();
                 }).catch(done);
         });
