@@ -65,7 +65,7 @@ describe("Nightmare tests https://goggle-books.herokuapp.com - Queried Search", 
     let query = "The Power of Now"; 
     let browser;
 
-
+    /*
     describe("Query Search retains header elements", function () {
         
         beforeEach(function () {
@@ -188,7 +188,7 @@ describe("Nightmare tests https://goggle-books.herokuapp.com - Queried Search", 
         });
 
     });
-
+*/
 
     describe("Queried Search Results Test", function () {
 

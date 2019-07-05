@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node server.js",
-    "test": "npx mocha test/",
+    "test": "npx mocha test/ --delay",
     "build:css": "npm run tailwind:css && npm run purge:css && npm run autoprefix:css && npm run uglify:css && npm run copy:css",
     "build:js": "npm run uglify:js && npm run copy:js",
     "tailwind:css": "npx tailwind build static/css/style.css -o static/css/output.css",
