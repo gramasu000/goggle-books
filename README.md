@@ -31,6 +31,8 @@ The directory structure of the project is as follows.
 
 ## Timeline
 
+### 07-03-19, 07-04-19, 07-05-19 - Improved Testing for Results page and Details page
+
 ### 07-02-19 - Removed Hostname from script file urls
 
  - Although this is a small action, this allows us to run the same script file for both development and production environments without changes.
