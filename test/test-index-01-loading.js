@@ -16,7 +16,7 @@ const assert = require("assert");
 /** Test whether GET, / endpoint serves webpage properly */
 describe("Nightmare visits https://goggle-books.herokuapp.com", function() {
     
-    this.timeout("15s");
+    this.timeout("30s");
 
     let browser;
 

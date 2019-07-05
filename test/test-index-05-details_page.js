@@ -109,7 +109,6 @@ function make_tests() {
             let website_htmls = [];
 
             before(function (done) {
-                console.log(api_htmls.length);
                 browser = new Nightmare();
                 browser.goto("https://goggle-books.herokuapp.com")
                     .wait("#content h1")
